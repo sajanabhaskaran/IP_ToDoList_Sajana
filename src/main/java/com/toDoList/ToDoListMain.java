@@ -1,5 +1,7 @@
 package com.toDoList;
 
+import java.io.File;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,18 +11,23 @@ public class ToDoListMain {
         ToDoListMain toDoListMain= new ToDoListMain();
         toDoListMain.mainPage();
 
+
+
     }
 
 
 
 
     private void mainPage() {
-        Task task= new Task("Wakeup","12/12/2021","New","Personal");
-        List<Task> taskArrayList= new ArrayList<>();
+        TaskFileHandler taskFileHandler= new TaskFileHandler();
+        File taskFile=taskFileHandler.getTaskFile();
+
+        /*List<Task> taskArrayList= new ArrayList<>();
+
         taskArrayList.add(new Task("Wakeup","12/12/2021","New","Personal"));
         taskArrayList.add(new Task("Sleep","12/12/2021","New","Personal"));
         taskArrayList.add(new Task("Study","12/12/2022","New","Professional"));
-        taskArrayList.add(new Task("Dance","12/12/2029","continuing","Personal"));
+        taskArrayList.add(new Task("Dance","12/12/2029","continuing","Personal"));*/
 
 
         Scanner s= new Scanner(System.in);
@@ -34,14 +41,21 @@ public class ToDoListMain {
             switch (input){
                 case "1":
                     System.out.println("go to show task list");
-                    taskArrayList.stream().forEach(task1 -> {
-                        System.out.println(task1);
-                    });
+
 
                     break;
                 case "2":
+                    AddTask addTask=new AddTask();
+                    //addTask.addNewTask()
+                    //System.out.println("go to Add new task list");
+                    //InputStreamReader isr= new InputStreamReader(new Scanner(System.in));
+                    addTask.processAddTaskUserInputs(taskFile);
 
-                    System.out.println("go to Add new task list");
+
+
+
+
+
                     break;
                 case "3":
                     System.out.println("Edit task list");
