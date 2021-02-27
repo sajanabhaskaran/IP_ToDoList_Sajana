@@ -18,22 +18,21 @@ public class ToDoListMain {
     private void mainPage() {
         TaskFileHandler taskFileHandler= new TaskFileHandler();
         Path taskFile=taskFileHandler.getTaskFile();
-        System.out.println(taskFile);
+        //System.out.println(taskFile);
 
 
         Scanner s= new Scanner(System.in);
         System.out.println("Pick an option: ");
-        System.out.println("(1) Show task list");
-        System.out.println("(2) Add new task");
-        System.out.println("(3) Edit task");
+        System.out.println("(1) Show Task list (By date or Project)");
+        System.out.println("(2) Add New Task");
+        System.out.println("(3) Edit Task (update, mark as done, remove)");
         System.out.println("(4) Save and Quit");
         if (s.hasNext()){
             String input= s.next();
             switch (input){
                 case "1":
                     ShowTask showTask= new ShowTask();
-                    showTask.showTaskFile(taskFile);
-
+                    showTask.filterOption(taskFile);
                     break;
                 case "2":
                     AddTask addTask=new AddTask();
@@ -45,6 +44,13 @@ public class ToDoListMain {
                 case "4":
                     System.out.println("Save and Quit");
                     break;
+                case "5":
+                    System.exit(1);
+                    break;
+                default:
+                    System.out.println("Invalid Option, please try again");
+                    mainPage();
+
             }
         }
 
