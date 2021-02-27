@@ -2,6 +2,7 @@ package com.toDoList;
 
 import java.io.File;
 import java.io.InputStreamReader;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -11,23 +12,13 @@ public class ToDoListMain {
         ToDoListMain toDoListMain= new ToDoListMain();
         toDoListMain.mainPage();
 
-
-
     }
-
-
 
 
     private void mainPage() {
         TaskFileHandler taskFileHandler= new TaskFileHandler();
-        File taskFile=taskFileHandler.getTaskFile();
-
-        /*List<Task> taskArrayList= new ArrayList<>();
-
-        taskArrayList.add(new Task("Wakeup","12/12/2021","New","Personal"));
-        taskArrayList.add(new Task("Sleep","12/12/2021","New","Personal"));
-        taskArrayList.add(new Task("Study","12/12/2022","New","Professional"));
-        taskArrayList.add(new Task("Dance","12/12/2029","continuing","Personal"));*/
+        Path taskFile=taskFileHandler.getTaskFile();
+        System.out.println(taskFile);
 
 
         Scanner s= new Scanner(System.in);
@@ -40,22 +31,13 @@ public class ToDoListMain {
             String input= s.next();
             switch (input){
                 case "1":
-                    System.out.println("go to show task list");
-
+                    ShowTask showTask= new ShowTask();
+                    showTask.showTaskFile(taskFile);
 
                     break;
                 case "2":
                     AddTask addTask=new AddTask();
-                    //addTask.addNewTask()
-                    //System.out.println("go to Add new task list");
-                    //InputStreamReader isr= new InputStreamReader(new Scanner(System.in));
                     addTask.processAddTaskUserInputs(taskFile);
-
-
-
-
-
-
                     break;
                 case "3":
                     System.out.println("Edit task list");
