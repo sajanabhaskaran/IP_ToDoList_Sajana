@@ -39,7 +39,8 @@ public class ToDoListMain {
                     addTask.processAddTaskUserInputs(taskFile);
                     break;
                 case "3":
-                    System.out.println("Edit task list");
+                    EditTask editTask= new EditTask();
+                    editTask.editOption(taskFile);
                     break;
                 case "4":
                     System.out.println("Save and Quit");

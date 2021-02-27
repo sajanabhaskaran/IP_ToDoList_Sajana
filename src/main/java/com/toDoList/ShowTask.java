@@ -60,14 +60,10 @@ public class ShowTask {
 
         }catch(IOException e){
             System.out.println(e.getMessage());
-
         }
-
-
     }
 
     public void showTaskFileByDate(Path filePath,String date){
-
         try(Stream<String> stream= Files.lines(filePath)) {
             List<Task> taskList=stream.map(line->{
                 String [] parts= line.split(",");
@@ -84,11 +80,8 @@ public class ShowTask {
 
             filterTask.stream().forEach(System.out::println);
 
-
-
         } catch (IOException e) {
             System.out.println(e.getMessage());
-
         }
     }
 }

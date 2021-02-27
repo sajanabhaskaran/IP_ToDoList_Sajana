@@ -18,9 +18,7 @@ public class TaskFileHandler {
         } catch (IOException e) {
 
         }
-
          return path;
-        //File file= new File()
     }
 
 }
