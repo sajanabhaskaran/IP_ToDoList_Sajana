@@ -34,6 +34,8 @@ public class ToDoListMain {
                 case "1":
                     ShowTask showTask= new ShowTask();
                     showTask.filterOption(taskFile);
+                    System.out.println("\n");
+                    mainPage();
                     break;
                 case "2":
                     AddTask addTask=new AddTask();

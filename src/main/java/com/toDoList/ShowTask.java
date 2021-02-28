@@ -1,12 +1,11 @@
 package com.toDoList;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -77,11 +76,25 @@ public class ShowTask {
                 if (task.getDueDate().equals(date)) return true;
                 return false;
             }).collect(Collectors.toList());
-
+            System.out.println("\n");
+            System.out.println("THESE ARE THE TASKS ON THE DATE :"+ date);
+            System.out.println("\n");
             filterTask.stream().forEach(System.out::println);
 
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public List<Task> showAllTasks(Path filePath) {
+        AtomicReference<Integer> n= new AtomicReference<>(1);
+        TaskFileHandler taskFileHandler= new TaskFileHandler();
+        List<Task> taskList=taskFileHandler.convertFilesToList(filePath);
+        taskList.stream().forEach(line->{
+            System.out.print(n +" : ");
+            System.out.println(line);
+            n.updateAndGet(v -> v + 1);
+        });
+        return taskList;
     }
 }
