@@ -15,7 +15,7 @@ public class Task {
         this.dueDate = dueDate;
         this.status = status;
         this.project = project;
-        this.taskArrayList=new ArrayList<>();
+        this.taskArrayList = new ArrayList<>();
     }
 
     public List<Task> getTaskArrayList() {

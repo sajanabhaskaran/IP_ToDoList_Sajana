@@ -12,22 +12,21 @@ import java.util.stream.Stream;
 
 public class TaskFileHandler {
     private String taskFileName = "SDA9_IP_TaskFile.rtf";
-    public Path getTaskFile(){
-        String userHomeDirectory= System.getProperty("user.home");
-        String taskFilePath= userHomeDirectory + File.separator + taskFileName;
-        Path path= Paths.get(taskFilePath);
+
+    public Path getTaskFile() {
+        String userHomeDirectory = System.getProperty("user.home");
+        String taskFilePath = userHomeDirectory + File.separator + taskFileName;
+        Path path = Paths.get(taskFilePath);
         try {
-            path=Files.createFile(path);
-
+            path = Files.createFile(path);
         } catch (IOException e) {
-
         }
-         return path;
+        return path;
     }
 
-    public List<Task> convertFilesToList(Path taskFile){
-        List<Task> taskList= new ArrayList<>();
-        try(Stream<String> stream= Files.lines(taskFile)) {
+    public List<Task> convertFilesToList(Path taskFile) {
+        List<Task> taskList = new ArrayList<>();
+        try (Stream<String> stream = Files.lines(taskFile)) {
             taskList = stream.map(line -> {
                 String[] parts = line.split(",");
                 String title = parts[0];
@@ -36,12 +35,9 @@ public class TaskFileHandler {
                 String project = parts[3];
                 return (new Task(title, dueDate, status, project));
             }).collect(Collectors.toList());
-
-
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
         return taskList;
     }
-
 }
