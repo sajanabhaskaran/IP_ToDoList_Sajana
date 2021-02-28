@@ -72,8 +72,56 @@ public class EditTask {
 
 
     private void markAsDone(Path taskFile) {
+        System.out.println("Enter the Title of the task which you want to mark as 'Done' :");
+        Scanner scanner=new Scanner(System.in);
+        String doneTitle= scanner.next();
+        try(Stream<String> stream= Files.lines(taskFile)) {
+            List<Task> taskList = stream.map(line -> {
+                String[] parts = line.split(",");
+                String title = parts[0];
+                String dueDate = parts[1];
+                String status = parts[2];
+                String project = parts[3];
+                return (new Task(title, dueDate, status, project));
+            }).collect(Collectors.toList());
+
+            taskList.stream().forEach(line->{
+                if (line.getTaskTitle().equals(doneTitle)){
+                    line.setStatus("Done");
+                }
+            });
+
+            Files.delete(taskFile);
+            Path path=Files.createFile(taskFile);
+
+            AddTask addTask= new AddTask();
+            addTask.addNewTask(taskList,taskFile);
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+
+
     }
 
     private void update(Path taskFile) {
+    }
+
+    private List<Task> convertFilesToList(Path taskFile){
+        try(Stream<String> stream= Files.lines(taskFile)) {
+            List<Task> taskList = stream.map(line -> {
+                String[] parts = line.split(",");
+                String title = parts[0];
+                String dueDate = parts[1];
+                String status = parts[2];
+                String project = parts[3];
+                return (new Task(title, dueDate, status, project));
+            }).collect(Collectors.toList());
+
+            Files.delete(taskFile);
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+
+          return ;
     }
 }

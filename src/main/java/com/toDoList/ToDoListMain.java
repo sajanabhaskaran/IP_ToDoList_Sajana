@@ -21,12 +21,13 @@ public class ToDoListMain {
         //System.out.println(taskFile);
 
 
-        Scanner s= new Scanner(System.in);
+
         System.out.println("Pick an option: ");
         System.out.println("(1) Show Task list (By date or Project)");
         System.out.println("(2) Add New Task");
         System.out.println("(3) Edit Task (update, mark as done, remove)");
         System.out.println("(4) Save and Quit");
+        Scanner s= new Scanner(System.in);
         if (s.hasNext()){
             String input= s.next();
             switch (input){
