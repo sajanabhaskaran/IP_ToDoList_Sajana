@@ -20,6 +20,7 @@ public class TaskFileHandler {
         String userHomeDirectory = System.getProperty("user.home");
         String taskFilePath = userHomeDirectory + File.separator + taskFileName;
         Path path = Paths.get(taskFilePath);
+
         try {
             path = Files.createFile(path);
         } catch (IOException e) {

@@ -12,6 +12,7 @@ public class ToDoListMain {
     private void mainPage() {
         TaskFileHandler taskFileHandler = new TaskFileHandler();
         Path taskFile = taskFileHandler.getTaskFile();
+
         System.out.println("Pick an option: ");
         System.out.println("(1) Show Task list (By date or Project)");
         System.out.println("(2) Add New Task");
@@ -23,7 +24,7 @@ public class ToDoListMain {
             switch (input) {
                 case "1":
                     ShowTask showTask = new ShowTask();
-                    showTask.filterOption(taskFile);
+                    showTask.sortOption(taskFile);
                     System.out.println("\n");
                     mainPage();
                     break;

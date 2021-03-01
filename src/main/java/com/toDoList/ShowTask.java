@@ -7,7 +7,7 @@ import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class ShowTask {
-    public void filterOption(Path filePath) {
+    public void sortOption(Path filePath) {
         Scanner scannerinput = new Scanner(System.in);
         System.out.println("ENTER THE OPTION 1 TO SORT BY DATE:  ");
         System.out.println("ENTER THE OPTION 2 TO SORT BY PROJECT: ");
@@ -25,7 +25,7 @@ public class ShowTask {
                 break;
             default:
                 System.out.println("INVALID OPTION, PLEASE ENTER AGAIN!!");
-                filterOption(filePath);
+                sortOption(filePath);
         }
     }
 

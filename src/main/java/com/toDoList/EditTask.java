@@ -101,7 +101,7 @@ public class EditTask {
         Scanner scanner = new Scanner(System.in);
         Integer input = Integer.parseInt(scanner.nextLine());
         Integer listSize = taskList.size();
-        if (input <= listSize) {
+        if (input >0 && input<= listSize) {
             System.out.println("ENTER THE FIELD, WHICH YOU WANT TO UPDATE :");
             Scanner scanner1 = new Scanner(System.in);
             String fieldInput = scanner1.nextLine().toLowerCase();
