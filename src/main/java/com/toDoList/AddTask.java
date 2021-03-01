@@ -49,22 +49,21 @@ public class AddTask {
     }
     public void processAddTaskUserInputs(Path filePath){
         Scanner scanner= new Scanner(System.in);
-        System.out.println("Enter the task tiltle: ");
+        System.out.println("ENTER THE TASK TITLE: ");
         String tiltle= scanner.nextLine();
-        System.out.println("Enter the due date (yyyy-MM-dd): ");
+        System.out.println("ENTER THE DUE DATE (yyyy-MM-dd): ");
         String stringDueDate= scanner.nextLine();
         SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
         Date dueDate= null;
         try {
             dueDate = sdf.parse(stringDueDate);
         } catch (ParseException e) {
-            System.out.println(e.getMessage());
-            System.out.println("Enter the due date in the proper format (yyyy-MM-dd): ");
-            dDate= scanner.nextLine();
+            System.out.println("INVALID ENTERED SO THE PROGRAM IS TERMINATING");
+            System.exit(1);
         }
-        System.out.println("Enter the task status: ");
+        System.out.println("ENTER THE TASK STATUS: ");
         String status= scanner.nextLine();
-        System.out.println("Enter the project: ");
+        System.out.println("ENTER THE PROJECT: ");
         String project= scanner.nextLine();
         Task task= new Task(tiltle,dueDate,status,project);
         addNewTaskToFile(task,filePath);

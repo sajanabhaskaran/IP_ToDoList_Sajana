@@ -46,8 +46,12 @@ public class EditTask {
         Integer input = Integer.parseInt(scanner.nextLine());
         Integer listSize = taskList.size();
         if (input <= listSize) {
-            taskList.remove(input-1);
+            taskList.remove(input - 1);
+        }else{
+            System.out.println("INVALID OPTION,SO THE PROGRAM IS TERMINATING");
+            System.exit(1);
         }
+
         try {
             Files.delete(taskFile);
             Path path = Files.createFile(taskFile);
@@ -98,10 +102,10 @@ public class EditTask {
         Integer input = Integer.parseInt(scanner.nextLine());
         Integer listSize = taskList.size();
         if (input <= listSize) {
-            System.out.println("Enter Field, which you want to update :");
+            System.out.println("ENTER THE FIELD, WHICH YOU WANT TO UPDATE :");
             Scanner scanner1 = new Scanner(System.in);
             String fieldInput = scanner1.nextLine().toLowerCase();
-            System.out.println("Enter the Value, you want to update to: ");
+            System.out.println("ENTER THE VALUE, WHICH YOU WANT TO UPDATE TO: ");
             String fieldValue = scanner1.nextLine();
             if (fieldInput.equals("tasktitle") || fieldInput.equals("duedate") || fieldInput.equals("status") || fieldInput.equals("project")) {
                 Task task = taskList.get(input - 1);
@@ -126,11 +130,11 @@ public class EditTask {
                         task.setProject(fieldValue);
                         break;
                     default:
-                        System.out.println("Invalid parameter");
+                        System.out.println("INVALID FIELD");
                         break;
                 }
             } else {
-                System.out.println("Invalid Input, please try again:");
+                System.out.println("INVALID INPUT, PLEASE TRY AGAIN:");
                 update(taskFile);
             }
 
@@ -141,11 +145,11 @@ public class EditTask {
                 System.out.println(e.getMessage());
             }
             AddTask addTask = new AddTask();
-            if (addTask.addNewTaskToFile(taskList, taskFile)) System.out.println("File updated successfully");
-            else System.out.println("File update Unsuccessful");
+            if (addTask.addNewTaskToFile(taskList, taskFile)) System.out.println("FILE UPDATED SUCCSESSFULLY");
+            else System.out.println("FILE NOT UPDATED");
         }
         else{
-            System.out.println("Invalid Option");
+            System.out.println("INVALID OPTION");
         }
 
 
