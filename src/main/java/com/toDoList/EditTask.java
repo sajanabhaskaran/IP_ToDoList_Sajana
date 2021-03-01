@@ -12,10 +12,10 @@ import java.util.stream.Collectors;
 
 public class EditTask {
     public void editOption(Path taskFile) {
-        System.out.println("Enter 1 to update");
-        System.out.println("Enter 2 to mark as done");
-        System.out.println("Enter 3 to remove");
-        System.out.println("Enter 4 to Quit");
+        System.out.println("ENTER THE OPTION 1 TO UPDATE THE TASK: ");
+        System.out.println("ENTER THE OPTION 2 TO MARK AS DONE STATE: ");
+        System.out.println("ENETER THE OPTION 3 TO REMOVE THE TASK: ");
+        System.out.println("ENTER THE OPTION 4 TO QUIT");
         Scanner editInput = new Scanner(System.in);
         String input = editInput.nextLine();
         switch (input) {
@@ -39,16 +39,15 @@ public class EditTask {
     }
 
     private void removeTask(Path taskFile) {
-        System.out.println("Enter the Title of the task which you want to remove:");
+        System.out.println("WHICH TASK YOU WANT TO REMOVE, ENTER THE INDEX NUMEBR:");
+        ShowTask showTask = new ShowTask();
+        List<Task> taskList = showTask.showAllTasks(taskFile);
         Scanner scanner = new Scanner(System.in);
-        String removeTitle = scanner.nextLine();
-        TaskFileHandler taskFileHandler = new TaskFileHandler();
-        List<Task> taskList = taskFileHandler.convertFilesToList(taskFile);
-
-        List<Task> newTaskList = taskList.stream().filter(line -> {
-            if (!line.getTaskTitle().equals(removeTitle)) return true;
-            return false;
-        }).collect(Collectors.toList());
+        Integer input = Integer.parseInt(scanner.nextLine());
+        Integer listSize = taskList.size();
+        if (input <= listSize) {
+            taskList.remove(input-1);
+        }
         try {
             Files.delete(taskFile);
             Path path = Files.createFile(taskFile);
@@ -56,21 +55,26 @@ public class EditTask {
             System.out.println(ioException.getMessage());
         }
         AddTask addTask = new AddTask();
-        addTask.addNewTaskToFile(newTaskList, taskFile);
+        if (addTask.addNewTaskToFile(taskList, taskFile)){
+            System.out.println("TASK REMOVED SUCCESSFULLY");
+            taskList.stream().forEach(System.out::println);
+        }else {
+            System.out.println("UNSUCCESSFULL!!!!");
+        }
+
     }
 
 
     private void markAsDone(Path taskFile) {
-        System.out.println("Enter the Title of the task which you want to mark as 'Done' :");
+        System.out.println("WHICH TASK YOU WANT TO MARK AS DONE STATE,ENTER THE INDEX NUMBER:");
+        ShowTask showTask = new ShowTask();
+        List<Task> taskList = showTask.showAllTasks(taskFile);
         Scanner scanner = new Scanner(System.in);
-        String doneTitle = scanner.next();
-        TaskFileHandler taskFileHandler = new TaskFileHandler();
-        List<Task> taskList = taskFileHandler.convertFilesToList(taskFile);
-        taskList.stream().forEach(line -> {
-            if (line.getTaskTitle().equals(doneTitle)) {
-                line.setStatus("Done");
-            }
-        });
+        Integer input = Integer.parseInt(scanner.nextLine());
+        Integer listSize = taskList.size();
+        if (input <= listSize) {
+            taskList.get(input-1).setStatus("Done");
+        }
         try {
             Files.delete(taskFile);
             Path path = Files.createFile(taskFile);
@@ -78,11 +82,16 @@ public class EditTask {
             System.out.println(e.getMessage());
         }
         AddTask addTask = new AddTask();
-        addTask.addNewTaskToFile(taskList, taskFile);
+        if (addTask.addNewTaskToFile(taskList, taskFile)){
+            System.out.println("TASK UPDATED SUCCESSFULLY");
+            taskList.stream().forEach(System.out::println);
+        }else {
+            System.out.println("UNSUCCESSFULL!!!!");
+        }
     }
 
     private void update(Path taskFile) {
-        System.out.println("Which Task you want to update:");
+        System.out.println("WHICH TASK YOU WANT TO UPDATE, ENTER THE INDEX NUMBER:");
         ShowTask showTask = new ShowTask();
         List<Task> taskList = showTask.showAllTasks(taskFile);
         Scanner scanner = new Scanner(System.in);
