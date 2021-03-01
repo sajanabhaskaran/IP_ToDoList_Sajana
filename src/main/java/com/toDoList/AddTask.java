@@ -59,6 +59,8 @@ public class AddTask {
             dueDate = sdf.parse(stringDueDate);
         } catch (ParseException e) {
             System.out.println(e.getMessage());
+            System.out.println("Enter the due date in the proper format (yyyy-MM-dd): ");
+            dDate= scanner.nextLine();
         }
         System.out.println("Enter the task status: ");
         String status= scanner.nextLine();
