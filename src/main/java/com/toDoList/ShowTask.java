@@ -3,6 +3,7 @@ package com.toDoList;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicReference;
@@ -19,16 +20,18 @@ public class ShowTask {
         String option = scannerinput.nextLine();
         switch (option) {
             case "1":
-                Scanner inputDate = new Scanner(System.in);
+                /*Scanner inputDate = new Scanner(System.in);
                 System.out.println("Enter the Date (dd/mm/yyyy): ");
                 String filterDate = inputDate.nextLine();
-                showTaskFileByDate(filePath, filterDate);
+                showTaskFileByDate(filePath, filterDate);*/
+                sortByDate(filePath);
                 break;
             case "2":
-                Scanner inputProject = new Scanner(System.in);
+                /*Scanner inputProject = new Scanner(System.in);
                 System.out.println("Enter the Project: ");
                 String filterProject = inputProject.nextLine();
-                showTaskFileByProject(filePath, filterProject);
+                showTaskFileByProject(filePath, filterProject);*/
+                sortByProject(filePath);
                 break;
             case "3":
                 System.exit(1);
@@ -39,7 +42,24 @@ public class ShowTask {
         }
     }
 
-    private void showTaskFileByProject(Path filePath, String filterProject) {
+    private void sortByDate(Path filePath) {
+
+    }
+
+    private void sortByProject(Path filePath) {
+        TaskFileHandler taskFileHandler = new TaskFileHandler();
+        List<Task> taskList = taskFileHandler.convertFilesToList(filePath);
+        Collections.sort(taskList,((o1, o2) -> {
+            Task task1= (Task) o1;
+            Task task2= (Task) o2;
+            return task1.getProject().toUpperCase().compareTo(task2.getProject().toUpperCase());
+        }));
+        System.out.println("All the tasks sorted by Project: ");
+        taskList.stream().forEach(System.out::println);
+
+    }
+
+    /*private void showTaskFileByProject(Path filePath, String filterProject) {
 
         TaskFileHandler taskFileHandler = new TaskFileHandler();
         List<Task> taskList = taskFileHandler.convertFilesToList(filePath);
@@ -58,9 +78,9 @@ public class ShowTask {
 
 
 
-    }
+    }*/
 
-    public void showTaskFileByDate(Path filePath, String date) {
+    /*public void showTaskFileByDate(Path filePath, String date) {
 
 
         TaskFileHandler taskFileHandler = new TaskFileHandler();
@@ -82,7 +102,7 @@ public class ShowTask {
         }
 
 
-    }
+    }*/
 
     public List<Task> showAllTasks(Path filePath) {
         AtomicReference<Integer> n = new AtomicReference<>(1);

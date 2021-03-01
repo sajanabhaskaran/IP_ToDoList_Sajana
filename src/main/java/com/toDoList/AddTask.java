@@ -44,7 +44,7 @@ public class AddTask {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the task tiltle: ");
         String tiltle = scanner.nextLine();
-        System.out.println("Enter the due date (dd/mm/yyyy): ");
+        System.out.println("Enter the due date (yyyy-MM-dd): ");
         String dueDate = scanner.nextLine();
         System.out.println("Enter the task status: ");
         String status = scanner.nextLine();
