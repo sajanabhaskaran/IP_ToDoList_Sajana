@@ -13,6 +13,7 @@ public class ToDoListMain {
         TaskFileHandler taskFileHandler = new TaskFileHandler();
         Path taskFile = taskFileHandler.getTaskFile();
 
+        System.out.println("WELCOME TO TODOLY");
         System.out.println("Pick an option: ");
         System.out.println("(1) Show Task list (By date or Project)");
         System.out.println("(2) Add New Task");
