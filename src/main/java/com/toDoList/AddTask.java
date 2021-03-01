@@ -8,6 +8,7 @@ import java.nio.file.StandardOpenOption;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class AddTask {
@@ -25,14 +26,27 @@ public class AddTask {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-
-
         return true;
     }
-    /*public boolean addNewTask(List<Task> task, Path file){
 
+
+    public boolean addNewTask(List<Task> task, Path file) {
+        task.stream().forEach(line -> {
+            String title = line.getTaskTitle();
+            Date dueDate = line.getDueDate();
+            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+            String  dDate= sdf.format(dueDate);
+            String status = line.getStatus();
+            String project = line.getProject();
+            String taskLineString = String.join(",", title, dDate, status, project);
+            try {
+                Files.write(file, (taskLineString + System.lineSeparator()).getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        });
         return true;
-    }*/
+    }
     public void processAddTaskUserInputs(Path filePath){
         Scanner scanner= new Scanner(System.in);
         System.out.println("Enter the task tiltle: ");
