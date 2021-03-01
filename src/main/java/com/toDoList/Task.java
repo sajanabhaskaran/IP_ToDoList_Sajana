@@ -1,16 +1,17 @@
 package com.toDoList;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Task {
     private List<Task> taskArrayList;
     private String taskTitle;
-    private String dueDate;
+    private Date dueDate;
     private String status;
     private String project;
 
-    public Task(String taskTitle, String dueDate, String status, String project) {
+    public Task(String taskTitle, Date dueDate, String status, String project) {
         this.taskTitle = taskTitle;
         this.dueDate = dueDate;
         this.status = status;
@@ -34,11 +35,11 @@ public class Task {
         this.taskTitle = taskTitle;
     }
 
-    public String getDueDate() {
+    public Date getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(String dueDate) {
+    public void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
     }
 

@@ -1,21 +1,25 @@
 package com.toDoList;
 
-import java.io.File;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class AddTask {
 
     public boolean addNewTask(Task task, Path file){
         String title=task.getTaskTitle();
-        String dueDate= task.getDueDate();
+        Date dueDate= task.getDueDate();
+        SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
+        String dDate=sdf.format(dueDate);
         String status= task.getStatus();
         String project= task.getProject();
-        String taskLineString= String.join(",",title,dueDate,status,project);
+        String taskLineString= String.join(",",title,dDate,status,project);
         try {
             Files.write(file,(taskLineString + System.lineSeparator()).getBytes(), StandardOpenOption.CREATE,StandardOpenOption.APPEND);
         } catch (IOException e) {
@@ -32,13 +36,20 @@ public class AddTask {
     public void processAddTaskUserInputs(Path filePath){
         Scanner scanner= new Scanner(System.in);
         System.out.println("Enter the task tiltle: ");
-        String tiltle= scanner.next();
-        System.out.println("Enter the due date (dd/mm/yyyy): ");
-        String dueDate= scanner.next();
+        String tiltle= scanner.nextLine();
+        System.out.println("Enter the due date (yyyy-MM-dd): ");
+        String dDate= scanner.nextLine();
+        SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
+        Date dueDate= null;
+        try {
+            dueDate = sdf.parse(dDate);
+        } catch (ParseException e) {
+            System.out.println(e.getMessage());
+        }
         System.out.println("Enter the task status: ");
-        String status= scanner.next();
+        String status= scanner.nextLine();
         System.out.println("Enter the project: ");
-        String project= scanner.next();
+        String project= scanner.nextLine();
         Task task= new Task(tiltle,dueDate,status,project);
         addNewTask(task,filePath);
     }
