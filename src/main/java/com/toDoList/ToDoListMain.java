@@ -30,10 +30,12 @@ public class ToDoListMain {
                 case "2":
                     AddTask addTask = new AddTask();
                     addTask.processAddTaskUserInputs(taskFile);
+                    mainPage();
                     break;
                 case "3":
                     EditTask editTask = new EditTask();
                     editTask.editOption(taskFile);
+                    mainPage();
                     break;
                 case "4":
                     System.out.println("Save and Quit");
