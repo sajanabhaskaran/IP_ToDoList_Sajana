@@ -19,7 +19,7 @@ public class ToDoListMain {
         System.out.println("(4) Save and Quit");
         Scanner s = new Scanner(System.in);
         if (s.hasNext()) {
-            String input = s.next();
+            String input = s.nextLine();
             switch (input) {
                 case "1":
                     ShowTask showTask = new ShowTask();

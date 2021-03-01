@@ -17,7 +17,7 @@ public class EditTask {
         System.out.println("Enter 3 to remove");
         System.out.println("Enter 4 to Quit");
         Scanner editInput = new Scanner(System.in);
-        String input = editInput.next();
+        String input = editInput.nextLine();
         switch (input) {
             case "1":
                 update(taskFile);
@@ -41,7 +41,7 @@ public class EditTask {
     private void removeTask(Path taskFile) {
         System.out.println("Enter the Title of the task which you want to remove:");
         Scanner scanner = new Scanner(System.in);
-        String removeTitle = scanner.next();
+        String removeTitle = scanner.nextLine();
         TaskFileHandler taskFileHandler = new TaskFileHandler();
         List<Task> taskList = taskFileHandler.convertFilesToList(taskFile);
 
@@ -86,14 +86,14 @@ public class EditTask {
         ShowTask showTask = new ShowTask();
         List<Task> taskList = showTask.showAllTasks(taskFile);
         Scanner scanner = new Scanner(System.in);
-        Integer input = Integer.parseInt(scanner.next());
+        Integer input = Integer.parseInt(scanner.nextLine());
         Integer listSize = taskList.size();
         if (input <= listSize) {
             System.out.println("Enter Field, which you want to update :");
             Scanner scanner1 = new Scanner(System.in);
-            String fieldInput = scanner1.next().toLowerCase();
+            String fieldInput = scanner1.nextLine().toLowerCase();
             System.out.println("Enter the Value, you want to update to: ");
-            String fieldValue = scanner1.next();
+            String fieldValue = scanner1.nextLine();
             if (fieldInput.equals("tasktitle") || fieldInput.equals("duedate") || fieldInput.equals("status") || fieldInput.equals("project")) {
                 Task task = taskList.get(input - 1);
                 switch (fieldInput) {
@@ -117,16 +117,21 @@ public class EditTask {
                 System.out.println("Invalid Input, please try again:");
                 update(taskFile);
             }
+
+            try {
+                Files.delete(taskFile);
+                Path path = Files.createFile(taskFile);
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+            AddTask addTask = new AddTask();
+            if (addTask.addNewTask(taskList, taskFile)) System.out.println("File updated successfully");
+            else System.out.println("File update Unsuccessful");
         }
-        try {
-            Files.delete(taskFile);
-            Path path = Files.createFile(taskFile);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+        else{
+            System.out.println("Invalid Option");
         }
-        AddTask addTask = new AddTask();
-        if (addTask.addNewTask(taskList, taskFile)) System.out.println("File updated successfully");
-        else System.out.println("File update Unsuccessful");
+
 
     }
 }

@@ -43,13 +43,13 @@ public class AddTask {
     public void processAddTaskUserInputs(Path filePath) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the task tiltle: ");
-        String tiltle = scanner.next();
+        String tiltle = scanner.nextLine();
         System.out.println("Enter the due date (dd/mm/yyyy): ");
-        String dueDate = scanner.next();
+        String dueDate = scanner.nextLine();
         System.out.println("Enter the task status: ");
-        String status = scanner.next();
+        String status = scanner.nextLine();
         System.out.println("Enter the project: ");
-        String project = scanner.next();
+        String project = scanner.nextLine();
         Task task = new Task(tiltle, dueDate, status, project);
         addNewTask(task, filePath);
     }
