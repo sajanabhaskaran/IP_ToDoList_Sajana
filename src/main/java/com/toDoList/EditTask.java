@@ -3,12 +3,12 @@ package com.toDoList;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class EditTask {
     public void editOption(Path taskFile) {
@@ -56,7 +56,7 @@ public class EditTask {
             System.out.println(ioException.getMessage());
         }
         AddTask addTask = new AddTask();
-        addTask.addNewTask(newTaskList, taskFile);
+        addTask.addNewTaskToFile(newTaskList, taskFile);
     }
 
 
@@ -78,7 +78,7 @@ public class EditTask {
             System.out.println(e.getMessage());
         }
         AddTask addTask = new AddTask();
-        addTask.addNewTask(taskList, taskFile);
+        addTask.addNewTaskToFile(taskList, taskFile);
     }
 
     private void update(Path taskFile) {
@@ -101,7 +101,14 @@ public class EditTask {
                         task.setTaskTitle(fieldValue);
                         break;
                     case "duedate":
-                        task.setDueDate(fieldValue);
+                        SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
+                        Date dueDate= null;
+                        try {
+                            dueDate = sdf.parse(fieldValue);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        task.setDueDate(dueDate);
                         break;
                     case "status":
                         task.setStatus(fieldValue);
@@ -125,7 +132,7 @@ public class EditTask {
                 System.out.println(e.getMessage());
             }
             AddTask addTask = new AddTask();
-            if (addTask.addNewTask(taskList, taskFile)) System.out.println("File updated successfully");
+            if (addTask.addNewTaskToFile(taskList, taskFile)) System.out.println("File updated successfully");
             else System.out.println("File update Unsuccessful");
         }
         else{

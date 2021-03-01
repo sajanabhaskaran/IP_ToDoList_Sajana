@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class AddTask {
 
-    public boolean addNewTask(Task task, Path file){
+    public boolean addNewTaskToFile(Task task, Path file){
         String title=task.getTaskTitle();
         Date dueDate= task.getDueDate();
         SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
@@ -30,7 +30,7 @@ public class AddTask {
     }
 
 
-    public boolean addNewTask(List<Task> task, Path file) {
+    public boolean addNewTaskToFile(List<Task> task, Path file) {
         task.stream().forEach(line -> {
             String title = line.getTaskTitle();
             Date dueDate = line.getDueDate();
@@ -52,11 +52,11 @@ public class AddTask {
         System.out.println("Enter the task tiltle: ");
         String tiltle= scanner.nextLine();
         System.out.println("Enter the due date (yyyy-MM-dd): ");
-        String dDate= scanner.nextLine();
+        String stringDueDate= scanner.nextLine();
         SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
         Date dueDate= null;
         try {
-            dueDate = sdf.parse(dDate);
+            dueDate = sdf.parse(stringDueDate);
         } catch (ParseException e) {
             System.out.println(e.getMessage());
         }
@@ -65,6 +65,6 @@ public class AddTask {
         System.out.println("Enter the project: ");
         String project= scanner.nextLine();
         Task task= new Task(tiltle,dueDate,status,project);
-        addNewTask(task,filePath);
+        addNewTaskToFile(task,filePath);
     }
 }
