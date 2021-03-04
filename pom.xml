@@ -13,4 +13,24 @@
         <maven.compiler.target>15</maven.compiler.target>
     </properties>
 
+    <build>
+        <finalName>ToDoList</finalName>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>com.toDoList.ToDoListMain</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
 </project>
