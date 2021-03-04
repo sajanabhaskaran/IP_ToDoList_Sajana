@@ -12,10 +12,10 @@ import java.util.stream.Collectors;
 
 public class EditTask {
     public void editOption(Path taskFile) {
-        System.out.println("ENTER THE OPTION 1 TO UPDATE THE TASK: ");
-        System.out.println("ENTER THE OPTION 2 TO MARK AS DONE STATE: ");
-        System.out.println("ENETER THE OPTION 3 TO REMOVE THE TASK: ");
-        System.out.println("ENTER THE OPTION 4 TO QUIT");
+        System.out.println("ENTER '1' TO UPDATE THE TASK: ");
+        System.out.println("ENTER '2' TO MARK AS DONE STATE: ");
+        System.out.println("ENTER '3' TO REMOVE THE TASK: ");
+        System.out.println("ENTER '4' TO QUIT");
         Scanner editInput = new Scanner(System.in);
         String input = editInput.nextLine();
         switch (input) {

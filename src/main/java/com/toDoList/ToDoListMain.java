@@ -13,7 +13,9 @@ public class ToDoListMain {
         TaskFileHandler taskFileHandler = new TaskFileHandler();
         Path taskFile = taskFileHandler.getTaskFile();
 
+        System.out.println("-----------------");
         System.out.println("WELCOME TO TODOLY");
+        System.out.println("-----------------");
         System.out.println("Pick an option: ");
         System.out.println("(1) Show Task list (By date or Project)");
         System.out.println("(2) Add New Task");
@@ -40,7 +42,7 @@ public class ToDoListMain {
                     mainPage();
                     break;
                 case "4":
-                    System.out.println("Save and Quit");
+                    System.out.println("Tasks Saved ");
                     System.exit(1);
                     break;
                 default:
