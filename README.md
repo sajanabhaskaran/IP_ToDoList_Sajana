@@ -27,5 +27,5 @@ mvn clean install
 ```
 The jar file will be generated in the target folder, which can be run by java environment.
 ```
-java -jar target/ToDoListjar
+java -jar target/ToDoList.jar
 ```
