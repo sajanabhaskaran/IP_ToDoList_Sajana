@@ -66,6 +66,8 @@ public class AddTask {
         System.out.println("ENTER THE PROJECT: ");
         String project= scanner.nextLine();
         Task task= new Task(tiltle,dueDate,status,project);
-        addNewTaskToFile(task,filePath);
+        if (addNewTaskToFile(task,filePath)){
+            System.out.println("Task Added to the File successfully in the location: "+ filePath);
+        }
     }
 }

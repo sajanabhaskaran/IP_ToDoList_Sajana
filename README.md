@@ -29,3 +29,5 @@ The jar file will be generated in the target folder, which can be run by java en
 ```
 java -jar target/ToDoList.jar
 ```
+
+## Usage of ToDoList App

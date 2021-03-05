@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class TaskFileHandler {
-    private String taskFileName = "SDA9_IP_TaskFile.rtf";
+    private String taskFileName = "SDA9_IP_TaskFile.txt";
 
     public Path getTaskFile() {
         String userHomeDirectory = System.getProperty("user.home");

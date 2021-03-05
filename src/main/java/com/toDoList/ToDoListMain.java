@@ -34,6 +34,7 @@ public class ToDoListMain {
                 case "2":
                     AddTask addTask = new AddTask();
                     addTask.processAddTaskUserInputs(taskFile);
+
                     mainPage();
                     break;
                 case "3":
