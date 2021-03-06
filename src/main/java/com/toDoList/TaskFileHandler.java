@@ -5,10 +5,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -35,13 +33,8 @@ public class TaskFileHandler {
                 String[] parts = line.split(",");
                 String title = parts[0];
                 String stringdueDate = parts[1];
-                SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
-                Date dueDate= null;
-                try {
-                    dueDate = sdf.parse(stringdueDate);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                AddTask addTask = new AddTask();
+                LocalDate dueDate = addTask.convertStringToDate(stringdueDate);
                 String status = parts[2];
                 String project = parts[3];
                 return (new Task(title, dueDate, status, project));

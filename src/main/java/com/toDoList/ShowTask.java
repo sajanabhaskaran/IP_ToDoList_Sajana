@@ -3,16 +3,12 @@ package com.toDoList;
 import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
-import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class ShowTask {
     public void sortOption(Path filePath) {
-        Scanner scannerinput = new Scanner(System.in);
-        System.out.println("ENTER '1' TO SORT BY DATE:  ");
-        System.out.println("ENTER '2' TO SORT BY PROJECT: ");
-        System.out.println("ENTER '3' TO QUIT: ");
-        String option = scannerinput.nextLine();
+        UserInput userInput = new UserInput();
+        String option = userInput.getShowTaskInputOption();
         switch (option) {
             case "1":
                 sortByDate(filePath);

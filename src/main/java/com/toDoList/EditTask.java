@@ -3,21 +3,15 @@ package com.toDoList;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class EditTask {
+
     public void editOption(Path taskFile) {
-        System.out.println("ENTER '1' TO UPDATE THE TASK: ");
-        System.out.println("ENTER '2' TO MARK AS DONE STATE: ");
-        System.out.println("ENTER '3' TO REMOVE THE TASK: ");
-        System.out.println("ENTER '4' TO QUIT");
-        Scanner editInput = new Scanner(System.in);
-        String input = editInput.nextLine();
+        UserInput userInput = new UserInput();
+        String input = userInput.getEditTaskInputOption();
+
         switch (input) {
             case "1":
                 update(taskFile);
@@ -39,15 +33,16 @@ public class EditTask {
     }
 
     private void removeTask(Path taskFile) {
-        System.out.println("WHICH TASK YOU WANT TO REMOVE, ENTER THE INDEX NUMEBR:");
+
         ShowTask showTask = new ShowTask();
         List<Task> taskList = showTask.showAllTasks(taskFile);
-        Scanner scanner = new Scanner(System.in);
-        Integer input = Integer.parseInt(scanner.nextLine());
+
+        UserInput userInput = new UserInput();
+        Integer input = Integer.parseInt(userInput.getRemoveTaskIndexNumber());
         Integer listSize = taskList.size();
         if (input <= listSize) {
             taskList.remove(input - 1);
-        }else{
+        } else {
             System.out.println("INVALID OPTION,SO THE PROGRAM IS TERMINATING");
             System.exit(1);
         }
@@ -59,10 +54,10 @@ public class EditTask {
             System.out.println(ioException.getMessage());
         }
         AddTask addTask = new AddTask();
-        if (addTask.addNewTaskToFile(taskList, taskFile)){
+        if (addTask.addNewTaskToFile(taskList, taskFile)) {
             System.out.println("TASK REMOVED SUCCESSFULLY");
             taskList.stream().forEach(System.out::println);
-        }else {
+        } else {
             System.out.println("UNSUCCESSFULL!!!!");
         }
 
@@ -70,14 +65,15 @@ public class EditTask {
 
 
     private void markAsDone(Path taskFile) {
-        System.out.println("WHICH TASK YOU WANT TO MARK AS DONE STATE,ENTER THE INDEX NUMBER:");
+
         ShowTask showTask = new ShowTask();
         List<Task> taskList = showTask.showAllTasks(taskFile);
-        Scanner scanner = new Scanner(System.in);
-        Integer input = Integer.parseInt(scanner.nextLine());
+
+        UserInput userInput = new UserInput();
+        Integer input = Integer.parseInt(userInput.getDoneTaskIndexNumber());
         Integer listSize = taskList.size();
         if (input <= listSize) {
-            taskList.get(input-1).setStatus("Done");
+            taskList.get(input - 1).setStatus("Done");
         }
         try {
             Files.delete(taskFile);
@@ -86,48 +82,42 @@ public class EditTask {
             System.out.println(e.getMessage());
         }
         AddTask addTask = new AddTask();
-        if (addTask.addNewTaskToFile(taskList, taskFile)){
+        if (addTask.addNewTaskToFile(taskList, taskFile)) {
             System.out.println("TASK UPDATED SUCCESSFULLY");
             taskList.stream().forEach(System.out::println);
-        }else {
+        } else {
             System.out.println("UNSUCCESSFULL!!!!");
         }
     }
 
     private void update(Path taskFile) {
-        System.out.println("WHICH TASK YOU WANT TO UPDATE, ENTER THE INDEX NUMBER:");
+
         ShowTask showTask = new ShowTask();
         List<Task> taskList = showTask.showAllTasks(taskFile);
-        Scanner scanner = new Scanner(System.in);
-        Integer input = Integer.parseInt(scanner.nextLine());
+
+        UserInput userInput = new UserInput();
+        Integer input = Integer.parseInt(userInput.getUpdateTaskIndexOption());
         Integer listSize = taskList.size();
-        if (input >0 && input<= listSize) {
-            System.out.println("ENTER THE FIELD, WHICH YOU WANT TO UPDATE :");
-            Scanner scanner1 = new Scanner(System.in);
-            String fieldInput = scanner1.nextLine().toLowerCase();
-            System.out.println("ENTER THE VALUE, WHICH YOU WANT TO UPDATE TO: ");
-            String fieldValue = scanner1.nextLine();
+        if (input > 0 && input <= listSize) {
+            List<String> fieldValue = userInput.getUpdateTaskFieldAndValue();
+            String fieldInput = fieldValue.get(0);
+            String valueInput = fieldValue.get(1);
             if (fieldInput.equals("tasktitle") || fieldInput.equals("duedate") || fieldInput.equals("status") || fieldInput.equals("project")) {
                 Task task = taskList.get(input - 1);
                 switch (fieldInput) {
                     case "tasktitle":
-                        task.setTaskTitle(fieldValue);
+                        task.setTaskTitle(valueInput);
                         break;
                     case "duedate":
-                        SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
-                        Date dueDate= null;
-                        try {
-                            dueDate = sdf.parse(fieldValue);
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
+                        AddTask addTask = new AddTask();
+                        LocalDate dueDate = addTask.convertStringToDate(valueInput);
                         task.setDueDate(dueDate);
                         break;
                     case "status":
-                        task.setStatus(fieldValue);
+                        task.setStatus(valueInput);
                         break;
                     case "project":
-                        task.setProject(fieldValue);
+                        task.setProject(valueInput);
                         break;
                     default:
                         System.out.println("INVALID FIELD");
@@ -147,8 +137,7 @@ public class EditTask {
             AddTask addTask = new AddTask();
             if (addTask.addNewTaskToFile(taskList, taskFile)) System.out.println("FILE UPDATED SUCCSESSFULLY");
             else System.out.println("FILE NOT UPDATED");
-        }
-        else{
+        } else {
             System.out.println("INVALID OPTION");
         }
 

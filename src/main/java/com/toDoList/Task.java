@@ -1,30 +1,21 @@
 package com.toDoList;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.Date;
-import java.util.List;
 
 public class Task {
-    private List<Task> taskArrayList;
+
     private String taskTitle;
-    private Date dueDate;
+    private LocalDate dueDate;
     private String status;
     private String project;
 
-    public Task(String taskTitle, Date dueDate, String status, String project) {
+    public Task(String taskTitle, LocalDate dueDate, String status, String project) {
         this.taskTitle = taskTitle;
         this.dueDate = dueDate;
         this.status = status;
         this.project = project;
-        this.taskArrayList = new ArrayList<>();
-    }
 
-    public List<Task> getTaskArrayList() {
-        return taskArrayList;
-    }
-
-    public void setTaskArrayList(List<Task> taskArrayList) {
-        this.taskArrayList = taskArrayList;
     }
 
     public String getTaskTitle() {
@@ -35,11 +26,11 @@ public class Task {
         this.taskTitle = taskTitle;
     }
 
-    public Date getDueDate() {
+    public LocalDate getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(Date dueDate) {
+    public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
 
