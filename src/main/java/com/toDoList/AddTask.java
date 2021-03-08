@@ -9,6 +9,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class AddTask {
+    private UserInput userInput;
+    public AddTask(UserInput userInput) {
+        this.userInput=userInput;
+    }
 
     public boolean addNewTaskToFile(Task task, Path file) {
         String title = task.getTaskTitle();
@@ -47,20 +51,11 @@ public class AddTask {
         UserInput userInput = new UserInput();
         TaskDto taskDto = userInput.getProcessAddTaskUserInputs();
 
-        Task task = new Task(taskDto.getTaskTitle(), convertStringToDate(taskDto.getDueDate()), taskDto.getStatus(), taskDto.getProject());
+        Task task = new Task(taskDto.getTaskTitle(), ToDoUtils.convertStringToDate(taskDto.getDueDate()), taskDto.getStatus(), taskDto.getProject());
         if (addNewTaskToFile(task, filePath)) {
             System.out.println("Task Added to the File successfully in the location: " + filePath);
         }
     }
 
-    public LocalDate convertStringToDate(String stringDate) {
-        try {
-            return LocalDate.parse(stringDate);
-        } catch (DateTimeException e) {
-            System.out.println("INVALID DATE ENTERED, SO THE PROGRAM IS TERMINATING");
-            throw new IllegalArgumentException(e);
-        }
 
-
-    }
 }

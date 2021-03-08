@@ -33,8 +33,7 @@ public class TaskFileHandler {
                 String[] parts = line.split(",");
                 String title = parts[0];
                 String stringdueDate = parts[1];
-                AddTask addTask = new AddTask();
-                LocalDate dueDate = addTask.convertStringToDate(stringdueDate);
+                LocalDate dueDate = ToDoUtils.convertStringToDate(stringdueDate);
                 String status = parts[2];
                 String project = parts[3];
                 return (new Task(title, dueDate, status, project));

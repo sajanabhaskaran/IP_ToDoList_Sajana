@@ -6,8 +6,12 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class ShowTask {
+    private UserInput userInput;
+    public ShowTask(UserInput userInput) {
+        this.userInput=userInput;
+    }
+
     public void sortOption(Path filePath) {
-        UserInput userInput = new UserInput();
         String option = userInput.getShowTaskInputOption();
         switch (option) {
             case "1":
@@ -59,5 +63,8 @@ public class ShowTask {
             n.updateAndGet(v -> v + 1);
         });
         return taskList;
+    }
+    public Integer add (Integer a,Integer b){
+        return a+b;
     }
 }

@@ -17,19 +17,19 @@ public class ToDoListMain {
 
         switch (s) {
             case "1":
-                ShowTask showTask = new ShowTask();
+                ShowTask showTask = new ShowTask(userInput);
                 showTask.sortOption(taskFile);
                 System.out.println("\n");
                 mainPage();
                 break;
             case "2":
-                AddTask addTask = new AddTask();
+                AddTask addTask = new AddTask(userInput);
                 addTask.processAddTaskUserInputs(taskFile);
 
                 mainPage();
                 break;
             case "3":
-                EditTask editTask = new EditTask();
+                EditTask editTask = new EditTask(userInput);
                 editTask.editOption(taskFile);
                 mainPage();
                 break;

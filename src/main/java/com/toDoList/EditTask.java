@@ -7,6 +7,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class EditTask {
+    private UserInput userInput;
+    public EditTask(UserInput userInput) {
+        this.userInput=userInput;
+    }
 
     public void editOption(Path taskFile) {
         UserInput userInput = new UserInput();
@@ -34,7 +38,7 @@ public class EditTask {
 
     private void removeTask(Path taskFile) {
 
-        ShowTask showTask = new ShowTask();
+        ShowTask showTask = new ShowTask(userInput);
         List<Task> taskList = showTask.showAllTasks(taskFile);
 
         UserInput userInput = new UserInput();
@@ -53,7 +57,7 @@ public class EditTask {
         } catch (IOException ioException) {
             System.out.println(ioException.getMessage());
         }
-        AddTask addTask = new AddTask();
+        AddTask addTask = new AddTask(userInput);
         if (addTask.addNewTaskToFile(taskList, taskFile)) {
             System.out.println("TASK REMOVED SUCCESSFULLY");
             taskList.stream().forEach(System.out::println);
@@ -66,7 +70,7 @@ public class EditTask {
 
     private void markAsDone(Path taskFile) {
 
-        ShowTask showTask = new ShowTask();
+        ShowTask showTask = new ShowTask(userInput);
         List<Task> taskList = showTask.showAllTasks(taskFile);
 
         UserInput userInput = new UserInput();
@@ -81,7 +85,7 @@ public class EditTask {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        AddTask addTask = new AddTask();
+        AddTask addTask = new AddTask(userInput);
         if (addTask.addNewTaskToFile(taskList, taskFile)) {
             System.out.println("TASK UPDATED SUCCESSFULLY");
             taskList.stream().forEach(System.out::println);
@@ -92,7 +96,7 @@ public class EditTask {
 
     private void update(Path taskFile) {
 
-        ShowTask showTask = new ShowTask();
+        ShowTask showTask = new ShowTask(userInput);
         List<Task> taskList = showTask.showAllTasks(taskFile);
 
         UserInput userInput = new UserInput();
@@ -109,7 +113,7 @@ public class EditTask {
                         task.setTaskTitle(valueInput);
                         break;
                     case "duedate":
-                        AddTask addTask = new AddTask();
+                        AddTask addTask = new AddTask(userInput);
                         LocalDate dueDate = addTask.convertStringToDate(valueInput);
                         task.setDueDate(dueDate);
                         break;
@@ -134,7 +138,7 @@ public class EditTask {
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
-            AddTask addTask = new AddTask();
+            AddTask addTask = new AddTask(userInput);
             if (addTask.addNewTaskToFile(taskList, taskFile)) System.out.println("FILE UPDATED SUCCSESSFULLY");
             else System.out.println("FILE NOT UPDATED");
         } else {
