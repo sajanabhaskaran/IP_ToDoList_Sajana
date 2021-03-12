@@ -21,7 +21,7 @@ The jar file will be generated in the java folder, which can be run by java envi
 java -jar ToDoListjar
 ```
 ### Run with Maven
-In the root folder, run the below command
+In the root folder, run the below command, to generate the jar file.
 ```bash
 mvn clean install
 ```
@@ -31,3 +31,20 @@ java -jar target/ToDoList.jar
 ```
 
 ## Usage of ToDoList App
+Open the Terminal and enter the below command to run the jar file.
+```
+java -jar target/ToDoList.jar
+```
+You are able to add a new Task in the ToDoList app by selecting the Option 2 and provide all the task details:
+
+![AddNewTask](screenshots/AddNewTask.png)
+
+You are able to view the task by date order or project order by selecting the Option 1
+
+![ShowTaskByOrder](screenshots/ShowTaskByOrder.png)
+
+![ShowTaskByProject](screenshots/ShowTaskByProject.png)
+
+You are able to edit task by selecting the Option 3
+
+![EditTask2](screenshots/EditTask2.png)

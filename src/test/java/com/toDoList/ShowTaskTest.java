@@ -22,13 +22,11 @@ public class ShowTaskTest {
         showTask= new ShowTask(userInput);
     }
 
-    @Test
+    /*@Test
     public void testSortOption(){
         Mockito.when(userInput.getShowTaskInputOption()).thenReturn("1");
         showTask.sortOption(null);
 
-
-
-    }
+    }*/
 
 }

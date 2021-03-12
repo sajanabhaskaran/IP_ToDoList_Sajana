@@ -114,7 +114,7 @@ public class EditTask {
                         break;
                     case "duedate":
                         AddTask addTask = new AddTask(userInput);
-                        LocalDate dueDate = addTask.convertStringToDate(valueInput);
+                        LocalDate dueDate=ToDoUtils.convertStringToDate(valueInput);
                         task.setDueDate(dueDate);
                         break;
                     case "status":
