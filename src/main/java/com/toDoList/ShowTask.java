@@ -1,5 +1,9 @@
 package com.toDoList;
 
+import com.entity.Task;
+import com.fileHandler.TaskFileHandler;
+import com.io.UserInput;
+
 import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
@@ -10,7 +14,12 @@ public class ShowTask {
     public ShowTask(UserInput userInput) {
         this.userInput=userInput;
     }
-
+    /**
+     * This method is used to get the user input for all the show task option.
+     * This method makes use of sortByDate, sortByProject method.
+     * @param filePath, the path of the taskfile.
+     * @return Nothing.
+     */
     public void sortOption(Path filePath) {
         String option = userInput.getShowTaskInputOption();
         switch (option) {
@@ -28,6 +37,11 @@ public class ShowTask {
                 sortOption(filePath);
         }
     }
+    /**
+     * This method is used to sort the tasks by DueDate and prints the sorted task list.
+     * @param filePath , the path of the taskfile.
+     * @return Nothing.
+     */
 
     private void sortByDate(Path filePath) {
         TaskFileHandler taskFileHandler = new TaskFileHandler();
@@ -40,7 +54,11 @@ public class ShowTask {
         System.out.println("TASCS SORTED BY DUE DATE ORDER: ");
         taskList.stream().forEach(System.out::println);
     }
-
+    /**
+     * This method is used to sort the tasks by Project and prints the sorted task list.
+     * @param filePath .
+     * @return Nothing.
+     */
     private void sortByProject(Path filePath) {
         TaskFileHandler taskFileHandler = new TaskFileHandler();
         List<Task> taskList = taskFileHandler.convertFilesToList(filePath);
@@ -52,7 +70,11 @@ public class ShowTask {
         System.out.println("TASCS SORTED BY PROJECT'S ALPHABETICAL ORDER: ");
         taskList.stream().forEach(System.out::println);
     }
-
+    /**
+     * This method is used to print all the task list.
+     * @param filePath , the path of the task file .
+     * @return Task List, the list contains all the tasks.
+     */
     public List<Task> showAllTasks(Path filePath) {
         AtomicReference<Integer> n = new AtomicReference<>(1);
         TaskFileHandler taskFileHandler = new TaskFileHandler();
@@ -64,7 +86,5 @@ public class ShowTask {
         });
         return taskList;
     }
-    public Integer add (Integer a,Integer b){
-        return a+b;
-    }
+
 }

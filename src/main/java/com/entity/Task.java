@@ -1,4 +1,4 @@
-package com.toDoList;
+package com.entity;
 
 import java.time.LocalDate;
 import java.util.Date;

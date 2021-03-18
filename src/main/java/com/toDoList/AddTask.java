@@ -1,10 +1,14 @@
 package com.toDoList;
 
+import com.entity.Task;
+import com.entity.TaskDataTranfer;
+import com.io.UserInput;
+import com.utility.ToDoUtils;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -49,9 +53,9 @@ public class AddTask {
 
     public void processAddTaskUserInputs(Path filePath) {
         UserInput userInput = new UserInput();
-        TaskDto taskDto = userInput.getProcessAddTaskUserInputs();
+        TaskDataTranfer taskDto = userInput.getProcessAddTaskUserInputs();
 
-        Task task = new Task(taskDto.getTaskTitle(), ToDoUtils.convertStringToDate(taskDto.getDueDate()), taskDto.getStatus(), taskDto.getProject());
+        Task task = new Task(taskDto.getTaskTitle(), ToDoUtils.convertStringToDate(taskDto.getDueDateString()), taskDto.getStatus(), taskDto.getProject());
         if (addNewTaskToFile(task, filePath)) {
             System.out.println("Task Added to the File successfully in the location: " + filePath);
         }

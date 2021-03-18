@@ -1,16 +1,14 @@
-package com.toDoList;
+package com.entity;
 
-import java.util.Date;
-
-public class TaskDto {
+public class TaskDataTranfer {
     private String taskTitle;
-    private String dueDate;
+    private String dueDateString;
     private String status;
     private String project;
 
-    public TaskDto(String taskTitle, String dueDate, String status, String project) {
+    public TaskDataTranfer(String taskTitle, String dueDate, String status, String project) {
         this.taskTitle = taskTitle;
-        this.dueDate = dueDate;
+        this.dueDateString = dueDate;
         this.status = status;
         this.project = project;
     }
@@ -23,12 +21,12 @@ public class TaskDto {
         this.taskTitle = taskTitle;
     }
 
-    public String getDueDate() {
-        return dueDate;
+    public String getDueDateString() {
+        return dueDateString;
     }
 
-    public void setDueDate(String dueDate) {
-        this.dueDate = dueDate;
+    public void setDueDateString(String dueDateString) {
+        this.dueDateString = dueDateString;
     }
 
     public String getStatus() {

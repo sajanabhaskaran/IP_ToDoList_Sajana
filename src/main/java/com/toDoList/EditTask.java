@@ -1,5 +1,8 @@
 package com.toDoList;
 
+import com.entity.Task;
+import com.io.UserInput;
+import com.utility.ToDoUtils;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,7 +14,11 @@ public class EditTask {
     public EditTask(UserInput userInput) {
         this.userInput=userInput;
     }
-
+    /**
+     * This method is used to get the user input for all the edit task option.
+     * @param taskFile, the path of the taskfile.
+     * @return Nothing.
+     */
     public void editOption(Path taskFile) {
         UserInput userInput = new UserInput();
         String input = userInput.getEditTaskInputOption();
@@ -35,6 +42,12 @@ public class EditTask {
         }
 
     }
+
+    /**
+     * This method is used to get the user input for all the edit task option.
+     * @param taskFile, the path of the taskfile.
+     * @return Nothing.
+     */
 
     private void removeTask(Path taskFile) {
 
@@ -114,7 +127,7 @@ public class EditTask {
                         break;
                     case "duedate":
                         AddTask addTask = new AddTask(userInput);
-                        LocalDate dueDate=ToDoUtils.convertStringToDate(valueInput);
+                        LocalDate dueDate= ToDoUtils.convertStringToDate(valueInput);
                         task.setDueDate(dueDate);
                         break;
                     case "status":

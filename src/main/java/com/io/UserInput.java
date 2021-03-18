@@ -1,4 +1,6 @@
-package com.toDoList;
+package com.io;
+
+import com.entity.TaskDataTranfer;
 
 import java.util.*;
 
@@ -24,7 +26,7 @@ public class UserInput {
         return scanner.nextLine();
     }
 
-    public TaskDto getProcessAddTaskUserInputs() {
+    public TaskDataTranfer getProcessAddTaskUserInputs() {
         System.out.println("ENTER THE TASK TITLE: ");
         String tiltle = scanner.nextLine();
         System.out.println("ENTER THE DUE DATE (yyyy-MM-dd): ");
@@ -33,7 +35,7 @@ public class UserInput {
         String status = scanner.nextLine();
         System.out.println("ENTER THE PROJECT: ");
         String project = scanner.nextLine();
-        TaskDto taskDto = new TaskDto(tiltle, stringDueDate, status, project);
+        TaskDataTranfer taskDto = new TaskDataTranfer(tiltle, stringDueDate, status, project);
         return taskDto;
     }
 

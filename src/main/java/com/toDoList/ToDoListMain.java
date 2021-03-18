@@ -1,8 +1,16 @@
 package com.toDoList;
 
+import com.fileHandler.TaskFileHandler;
+import com.io.UserInput;
+
 import java.nio.file.Path;
 
 public class ToDoListMain {
+    /**
+     * This is the main method which makes use of mainPage method.
+     * @param args Unused.
+     * @return Nothing.
+     */
     public static void main(String[] args) {
         ToDoListMain toDoListMain = new ToDoListMain();
         toDoListMain.mainPage();
