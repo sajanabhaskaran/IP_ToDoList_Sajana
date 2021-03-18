@@ -44,9 +44,12 @@ public class EditTask {
     }
 
     /**
-     * This method is used to get the user input for all the edit task option.
+     * This method is used to remove the task based on the user input,
+     * which makes use of showAllTasks and getRemoveTaskIndexNumber methods.
      * @param taskFile, the path of the taskfile.
      * @return Nothing.
+     * @exception IOException On file deletion.
+     * @see IOException
      */
 
     private void removeTask(Path taskFile) {
@@ -79,7 +82,14 @@ public class EditTask {
         }
 
     }
-
+    /**
+     * This method is used to mark done for the task based on the user input,
+     * which makes use of showAllTasks and getDoneTaskIndexNumber methods.
+     * @param taskFile, the path of the taskfile.
+     * @return Nothing.
+     * @exception IOException On file deletion.
+     * @see IOException
+     */
 
     private void markAsDone(Path taskFile) {
 
@@ -106,7 +116,14 @@ public class EditTask {
             System.out.println("UNSUCCESSFULL!!!!");
         }
     }
-
+    /**
+     * This method is used to update the task based on the user input,
+     * which makes use of showAllTasks and getUpdateTaskIndexOption methods.
+     * @param taskFile, the path of the taskfile.
+     * @return Nothing.
+     * @exception IOException On file deletion.
+     * @see IOException
+     */
     private void update(Path taskFile) {
 
         ShowTask showTask = new ShowTask(userInput);
